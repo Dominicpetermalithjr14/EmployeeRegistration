@@ -8,20 +8,57 @@
 <h:head>
         <title>Employee Registration Form</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <style>
+        <style type="text/css">
            .Bimage{background-image: url("resources/image/cf.jpg");}
-          
+          .dd {
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 28;
+  -moz-border-radius: 28;
+  border-radius: 28px;
+  font-family: Arial;
+  color: #000;
+  font-size: 27px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.dd:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
+*{
+    font-family:Everson Mono;
+font-size: 15px;
+letter-spacing: 5px;
+word-spacing: 2px;
+color: #000000;
+font-weight: normal;
+text-decoration: none;
+font-style: normal;
+font-variant: normal;
+text-transform: none;
+}
         </style>
         
     </h:head>
     <h:body styleClass="Bimage">
         <h:form>
-            <div align="center">
+            <div align="bottom">
                 <div>
   <h1>Employee Registration Form</h1>
                 </div>
   <h:panelGrid columns="2">
-      <div>
+      <div class="two">
       <h:outputLabel value="firstName">
           <h:inputText value="#{employee2.firstName}">
               <f:validateRequired/>
@@ -29,7 +66,7 @@
           </h:inputText>
       </h:outputLabel>
       </div>
-      <div>
+      <div class="three">
       <h:outputLabel value="lastName">
           <h:inputText value="#{employee2.lastName}">
               <f:validateRequired/>
@@ -38,7 +75,7 @@
           
       </h:outputLabel>
           </div>
-      <div>
+      <div class="four">
       <h:outputLabel value="username">
           <h:inputText value="#{employee2.username}">
               <f:validateRequired/>
@@ -46,7 +83,7 @@
           </h:inputText>
           </h:outputLabel>
       </div>
-      <div>
+      <div class="five">
           <h:outputLabel value="password">
               <h:inputSecret value="#{employee2.password}">
               <f:validateRegex pattern="^([A-Za-z]*)$"/>
@@ -54,7 +91,7 @@
           </h:inputSecret>     
           </h:outputLabel>
       </div>
-      <div>
+      <div class="six">
       <h:outputLabel value="address">
           <h:inputText value="#{employee2.address}">
               <f:validateRequired/>
@@ -63,7 +100,7 @@
           
       </h:outputLabel>
       </div>
-      <div>
+      <div class="seven">
       <h:outputLabel value="contact">
           <h:inputText value="#{employee2.contact}">
               <f:validateRequired/>
@@ -73,8 +110,10 @@
       </h:outputLabel>
       </div>
      </h:panelGrid>
-  <h:commandButton  value="Submit" action="#{employee2.goLogin()}">
+                <div class="eight">
+  <h:commandButton class="dd" value="Submit" action="#{employee2.goLogin()}">
                    </h:commandButton>
+            </div>
             </div>
     </h:form>
 </h:body> 
