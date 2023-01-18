@@ -1,7 +1,9 @@
 
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "employee2")
 @SessionScoped
@@ -90,11 +92,21 @@ private String firstName;
     public void setContact(String contact) {
         this.contact = contact;
     }
-    public String goLogin()
-    {
-    return "registered";
-        
-}
+   
+    public String registerdEmployeeInfo() {
+        boolean stored = true;
+        FacesMessage message = null;
+        String outcome = null;
+        if (stored) {
+            message = new FacesMessage("Employee Information is registered Successfully.");
+            outcome = "registered";
+        } else {
+            message = new FacesMessage("Employee Information is NOT registered Successfully.");
+            outcome = "registrationFail";
+        }
+        FacesContext.getCurrentInstance().addMessage(null, message);
+        return outcome;
+    }
 
     
     
