@@ -1,121 +1,149 @@
-
 import java.io.Serializable;
-import javax.faces.application.FacesMessage;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
-@ManagedBean(name = "employee2")
+@ManagedBean
 @SessionScoped
 public class Employee implements Serializable{
     private static final long serialVersionUID = 1L;
-     private int id;
-private String firstName;
-    private String lastName;
-    private String username;
-    private String password;
-    private String department;
-     private int salary;
-    private String address;
-    private String contact;
-    private String city;
+     private int ID;
+private String FIRST_NAME;
+    private String LAST_NAME;
+    private String USERNAME;
+    private String PASSWORD;
+    private String DEPARTMENT;
+     private String SALARY;
+    private String ADDRESS;
+    private String CONTACT;
+    private String CITY;
     
 
-    private Employee(int id, String firstName, String lastName, String username, String password, String address, String contact, String department, int salary, String city) {
+    private Employee(int ID, String FIRST_NAME, String LAST_NAME, String USERNAME, String PASSWORD, String ADDRESS, String CONTACT, String DEPARTMENT, String  SALARY, String CITY) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-     public int getId() {
-        return id;
+     public int getID() {
+        return ID;
+    }
+     public void setID(int ID){
+       this.ID=ID;
+         
+     }
+
+    public String getCITY() {
+        return CITY;
     }
 
-    public String getCity() {
-        return city;
+    public void setCITY(String CITY) {
+        this.CITY= CITY;
     }
 
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int ID) {
+        this.ID = ID;
     }
     
-    public String getFirstName() {
-        return firstName;
+    public String getFIRST_NAME() {
+        return FIRST_NAME;
     }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFIRST_NAME(String FIRST_NAME) {
+        this.FIRST_NAME = FIRST_NAME;
     }
-    public String getLastName() {
-        return lastName;
+    public String getLAST_NAME() {
+        return LAST_NAME;
     }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLAST_NAME(String LAST_NAME) {
+        this.LAST_NAME = LAST_NAME;
     }
-    public String getUsername() {
-        return username;
+    public String getUSERNAME() {
+        return USERNAME;
     }
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUSERNAME(String USERNAME) {
+        this.USERNAME = USERNAME;
     }
-    public String getPassword() {
-        return password;
+    public String getPASSWORD() {
+        return PASSWORD;
     }
-    public void setPassword(String password) {
-        this.password = password;
-    }
-    
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setPASSWORD(String PASSWORD) {
+        this.PASSWORD = PASSWORD;
     }
     
-    public int getSalary() {
-        return salary;
+    public String getDEPARTMENT() {
+        return DEPARTMENT;
     }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
+    public void setDEPARTMENT(String DEPARTMENT) {
+        this.DEPARTMENT= DEPARTMENT;
     }
-    public String getAddress() {
-        return address;
+    
+    public String getSALARY() {
+        return SALARY;
     }
-    public void setAddress(String address) {
-        this.address = address;
+
+    public void setSALARY(String SALARY) {
+        this.SALARY= SALARY;
     }
-    public String getContact() {
-        return contact;
+    public String getADDRESS() {
+        return ADDRESS;
     }
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setADDRESS(String ADDRESS) {
+        this.ADDRESS = ADDRESS;
+    }
+    public String getCONTACT() {
+        return CONTACT;
+    }
+    public void setCONTACT(String CONTACT) {
+        this.CONTACT = CONTACT;
+    }
+    public Employee(){
+        
     }
    
-    public String registerdEmployeeInfo() {
-        boolean stored = true;
-        FacesMessage message = null;
-        String outcome = null;
-        if (stored) {
-            message = new FacesMessage("Employee Information is registered Successfully.");
-            outcome = "registered";
-        } else {
-            message = new FacesMessage("Employee Information is NOT registered Successfully.");
-            outcome = "registrationFail";
-        }
-        FacesContext.getCurrentInstance().addMessage(null, message);
-        return outcome;
-    }
-
-    
-    
-    public Employee() {
-    }
-
+    /**
+     *
+     * @return 
+     * @throws java.lang.ClassNotFoundException
+     */
+    public boolean save() throws ClassNotFoundException  
+    {
+        int result=0;
+        try{
+            Class.forName("oracle.jdbc.driver.OracleDriver");   
+        
+            
+Connection con =  DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe");
+       PreparedStatement stmt = con.prepareStatement("insert into EMPLOYEE(FIRST_NAME,LAST_NAME,USERNAME,PASSWORD,DEPARTMENT,SALARY,ADDRESS,CONTACT,CITY) values (?,?,?,?,?,?,?,?,?,)");
+       stmt.setInt(1, this.getID());
+       stmt.setString(2, this.getFIRST_NAME()); 
+        stmt.setString(3, this.getLAST_NAME()); 
+         stmt.setString(4, this.getUSERNAME()); 
+          stmt.setString(5, this.getPASSWORD()); 
+           stmt.setString(6, this.getDEPARTMENT()); 
+            stmt.setString(7, this.getSALARY()); 
+             stmt.setString(8, this.getADDRESS()); 
+              stmt.setString(9, this.getCONTACT()); 
+               stmt.setString(10, this.getCITY());
+                result = stmt.executeUpdate();  
+            
    
-    
+         
+}    catch(SQLException e){ 
+    System.out.println(e); 
 }
-
-    
-    
+        if(result==1){
+            return true;
+        }else {
+            return false;
+        }
+    }
+    public String submit() throws ClassNotFoundException{
+       if(this.save()){
+           return "index.xhtml";
+       }
+       else {
+           return "response.xhtml";
+       }
+        }
+       }
