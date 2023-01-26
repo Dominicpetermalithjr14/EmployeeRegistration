@@ -1,4 +1,5 @@
 
+
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,93 +12,102 @@ import javax.faces.bean.SessionScoped;
 @SessionScoped
 public class Employee implements Serializable{
     private static final long serialVersionUID = 1L;
-     private int ID;
-private String FIRST_NAME;
-    private String LAST_NAME;
-    private String USERNAME;
-    private String PASSWORD;
-    private String DEPARTMENT;
-     private String SALARY;
-    private String ADDRESS;
-    private String CONTACT;
-    private String CITY;
+     private int id;
+private String first_Name;
+    private String last_Name;
+    private String username;
+    private String password;
+    private String department;
+     private String salary;
+    private String address;
+    private String contact;
+    private String city;
     
 
-    private Employee(int ID, String FIRST_NAME, String LAST_NAME, String USERNAME, String PASSWORD, String ADDRESS, String CONTACT, String DEPARTMENT, String  SALARY, String CITY) {
+    private Employee(int id, String first_Name, String last_Name, String username, String password, String department, String salary, String address, String  contact, String city) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-     public int getID() {
-        return ID;
-    }
-     public void setID(int ID){
-       this.ID=ID;
-         
-     }
 
-    public String getCITY() {
-        return CITY;
+    public int getId() {
+        return id;
     }
 
-    public void setCITY(String CITY) {
-        this.CITY= CITY;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setId(int ID) {
-        this.ID = ID;
-    }
-    
-    public String getFIRST_NAME() {
-        return FIRST_NAME;
-    }
-    public void setFIRST_NAME(String FIRST_NAME) {
-        this.FIRST_NAME = FIRST_NAME;
-    }
-    public String getLAST_NAME() {
-        return LAST_NAME;
-    }
-    public void setLAST_NAME(String LAST_NAME) {
-        this.LAST_NAME = LAST_NAME;
-    }
-    public String getUSERNAME() {
-        return USERNAME;
-    }
-    public void setUSERNAME(String USERNAME) {
-        this.USERNAME = USERNAME;
-    }
-    public String getPASSWORD() {
-        return PASSWORD;
-    }
-    public void setPASSWORD(String PASSWORD) {
-        this.PASSWORD = PASSWORD;
-    }
-    
-    public String getDEPARTMENT() {
-        return DEPARTMENT;
+    public String getFirst_Name() {
+        return first_Name;
     }
 
-    public void setDEPARTMENT(String DEPARTMENT) {
-        this.DEPARTMENT= DEPARTMENT;
-    }
-    
-    public String getSALARY() {
-        return SALARY;
+    public void setFirst_Name(String first_Name) {
+        this.first_Name = first_Name;
     }
 
-    public void setSALARY(String SALARY) {
-        this.SALARY= SALARY;
+    public String getLast_Name() {
+        return last_Name;
     }
-    public String getADDRESS() {
-        return ADDRESS;
+
+    public void setLast_Name(String last_Name) {
+        this.last_Name = last_Name;
     }
-    public void setADDRESS(String ADDRESS) {
-        this.ADDRESS = ADDRESS;
+
+    public String getUsername() {
+        return username;
     }
-    public String getCONTACT() {
-        return CONTACT;
+
+    public void setUsername(String username) {
+        this.username = username;
     }
-    public void setCONTACT(String CONTACT) {
-        this.CONTACT = CONTACT;
+
+    public String getPassword() {
+        return password;
     }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getSalary() {
+        return salary;
+    }
+
+    public void setSalary(String salary) {
+        this.salary = salary;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+   
     public Employee(){
         
     }
@@ -114,18 +124,18 @@ private String FIRST_NAME;
             Class.forName("oracle.jdbc.driver.OracleDriver");   
         
             
-Connection con =  DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe");
-       PreparedStatement stmt = con.prepareStatement("insert into EMPLOYEE(FIRST_NAME,LAST_NAME,USERNAME,PASSWORD,DEPARTMENT,SALARY,ADDRESS,CONTACT,CITY) values (?,?,?,?,?,?,?,?,?,)");
-       stmt.setInt(1, this.getID());
-       stmt.setString(2, this.getFIRST_NAME()); 
-        stmt.setString(3, this.getLAST_NAME()); 
-         stmt.setString(4, this.getUSERNAME()); 
-          stmt.setString(5, this.getPASSWORD()); 
-           stmt.setString(6, this.getDEPARTMENT()); 
-            stmt.setString(7, this.getSALARY()); 
-             stmt.setString(8, this.getADDRESS()); 
-              stmt.setString(9, this.getCONTACT()); 
-               stmt.setString(10, this.getCITY());
+Connection con =  DriverManager.getConnection("DB_URL, USER, PASS");
+       PreparedStatement stmt = con.prepareStatement("insert into EMPLOYEE(id,first_Name,last_Name,username,password,department,salary,address,contact,city) values (?,?,?,?,?,?,?,?,?,)");
+       stmt.setInt(1, this.getId());
+       stmt.setString(2,this.getFirst_Name()); 
+        stmt.setString(3, this.getLast_Name()); 
+         stmt.setString(4, this.getUsername()); 
+          stmt.setString(5, this.getPassword()); 
+           stmt.setString(6, this.getDepartment()); 
+            stmt.setString(7, this.getSalary()); 
+             stmt.setString(8, this.getAddress()); 
+              stmt.setString(9, this.getContact()); 
+               stmt.setString(10, this.getCity());
                 result = stmt.executeUpdate();  
             
    
@@ -149,6 +159,16 @@ Connection con =  DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:
         }
        }
         
+    
+   
+
+
+  
+
+
+    
+    
+
     
    
 
