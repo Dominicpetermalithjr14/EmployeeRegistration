@@ -11,7 +11,7 @@ import javax.faces.bean.SessionScoped;
 @ManagedBean
 @SessionScoped
 public class Employee implements Serializable{
-    private static final long serialVersionUID = 1L;
+
      private int id;
 private String first_Name;
     private String last_Name;
@@ -24,9 +24,7 @@ private String first_Name;
     private String city;
     
 
-    private Employee(int id, String first_Name, String last_Name, String username, String password, String department, String salary, String address, String  contact, String city) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    public Employee(){}
 
     public int getId() {
         return id;
@@ -108,57 +106,38 @@ private String first_Name;
         this.city = city;
     }
    
-    public Employee(){
-        
-    }
+
+    
    
     /**
      *
      * @return 
      * @throws java.lang.ClassNotFoundException
      */
-    public boolean save() throws ClassNotFoundException  
-    {
-        int result=0;
-        try{
-            Class.forName("oracle.jdbc.driver.OracleDriver");   
-        
-            
-Connection con =  DriverManager.getConnection("DB_URL, USER, PASS");
-       PreparedStatement stmt = con.prepareStatement("insert into EMPLOYEE(id,first_Name,last_Name,username,password,department,salary,address,contact,city) values (?,?,?,?,?,?,?,?,?,)");
-       stmt.setInt(1, this.getId());
-       stmt.setString(2,this.getFirst_Name()); 
-        stmt.setString(3, this.getLast_Name()); 
-         stmt.setString(4, this.getUsername()); 
-          stmt.setString(5, this.getPassword()); 
-           stmt.setString(6, this.getDepartment()); 
-            stmt.setString(7, this.getSalary()); 
-             stmt.setString(8, this.getAddress()); 
-              stmt.setString(9, this.getContact()); 
-               stmt.setString(10, this.getCity());
-                result = stmt.executeUpdate();  
-            
-   
-         
-}    catch(SQLException e){ 
-    System.out.println(e); 
-}
-        if(result==1){
-            return true;
-        }else {
-            return false;
+   public String register() throws ClassNotFoundException {
+        try {
+            DBConnection db=new DBConnection();
+             Connection connection = db.connMethod();
+        PreparedStatement stmt=connection.prepareStatement("Insert into EMPLOYEE(ID,FIRST_NAME,LAST_NAME,PASSWORD,DEPARTMENT,SALARY,ADDRESS,CONTACT,CITY,USERNAME) values (?,?,?,?,?,?,?,?,?,?)");     
+        stmt.setInt(1,id);  
+        stmt.setString(2,first_Name);  
+        stmt.setString(3,last_Name);  
+        stmt.setString(4,password); 
+         stmt.setString(5,department);  
+        stmt.setString(6,salary);
+        stmt.setString(7,address);
+        stmt.setString(8,contact);
+        stmt.setString(9,city);
+        stmt.setString(10,username);
+        stmt.executeUpdate();  
+            return "register";
         }
+        catch (SQLException e) {
+        }
+         return "registrationfail";
     }
-    public String submit() throws ClassNotFoundException{
-       if(this.save()){
-           return "index.xhtml";
-       }
-       else {
-           return "response.xhtml";
-       }
         }
-       }
-        
+       
     
    
 
