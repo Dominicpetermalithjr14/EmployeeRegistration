@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
- <h:head>
+<h:head>
         <title>Employee Registration Form</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <style type="text/css">
@@ -47,10 +47,18 @@ text-transform: none;
         <h:form>
           <fieldset>      
   <h1 align="right" style="font-size: 15pt; color: red;">Employee Registration Form</h1>
+  <p align="right" style="font-size: 5pt; color: #000000">
+      <h:outputLabel value="Id">
+              <h:inputSecret value="#{employee.id}">
+              <f:validateRequired/>
+              <f:validateLength minimum="3" maximum="10"/>
+          </h:inputSecret>     
+          </h:outputLabel>
+      </p>
               
           <p align="right" style="font-size: 5pt; color: #000000">
       <h:outputLabel value="firstName">
-          <h:inputText value="#{employee.firstName}">
+          <h:inputText value="#{employee.first_Name}">
               <f:validateRequired/>
               <f:validateLength minimum="5" maximum="10"/>
           </h:inputText>
@@ -58,7 +66,7 @@ text-transform: none;
           </p>
       <p align="right" style="font-size: 5pt; color: #000000">
       <h:outputLabel value="lastName">
-          <h:inputText value="#{employee.lastName}">
+          <h:inputText value="#{employee.last_Name}">
               <f:validateRequired/>
               <f:validateLength minimum="4" maximum="10"/>
           </h:inputText>
@@ -67,51 +75,39 @@ text-transform: none;
       </p>
       <p align="right" style="font-size: 5pt; color: #000000">
     
-      <h:outputLabel value="username">
-          <h:inputText value="#{employee.username}">
+      <h:outputLabel value="password">
+          <h:inputSecret value="#{employee.password}">
               <f:validateRequired/>
-              <f:validateLength minimum="3" maximum="10"/>
-          </h:inputText>
+              <f:validateLength minimum="6" maximum="13"/>
+          </h:inputSecret>
           </h:outputLabel>
       </p>
       <p align="right" style="font-size: 5pt; color: #000000">
-          <h:outputLabel value="password">
-              <h:inputSecret value="#{employee.password}">
-              <f:validateRegex pattern="^([A-Za-z]*)$"/>
-              <f:validateLength minimum="8" maximum="14"/>
-          </h:inputSecret>     
-          </h:outputLabel>
-      </p>
-      <p align="right" style="font-size: 5pt; color: #000000">
-      <h:outputLabel value="department">
-              <h:inputSecret value="#{employee.department}">
-              <f:validateRequired/>
-              <f:validateLength minimum="8" maximum="14"/>
-          </h:inputSecret>     
+          <h:outputLabel value="department">
+              <h:inputText value="#{employee.department}">
+       
+          </h:inputText>     
           </h:outputLabel>
       </p>
       <p align="right" style="font-size: 5pt; color: #000000">
       <h:outputLabel value="salary">
-              <h:inputSecret value="#{employee.salary}">
+              <h:inputText value="#{employee.salary}">
               <f:validateRequired/>
-              <f:validateLength minimum="8" maximum="20"/>
-          </h:inputSecret>     
+              <f:validateLength minimum="4" maximum="10"/>
+          </h:inputText>     
           </h:outputLabel>
       </p>
       <p align="right" style="font-size: 5pt; color: #000000">
       <h:outputLabel value="address">
-          <h:inputText value="#{employee.address}">
+              <h:inputText value="#{employee.address}">
               <f:validateRequired/>
-              <f:validateLength minimum="2" maximum="10"/>
-          </h:inputText>
-          
-      </h:outputLabel>
+              <f:validateLength minimum="4" maximum="10"/>
+          </h:inputText>     
+          </h:outputLabel>
       </p>
       <p align="right" style="font-size: 5pt; color: #000000">
       <h:outputLabel value="contact">
           <h:inputText value="#{employee.contact}">
-              <f:validateRequired/>
-              <f:validateLength minimum="5" maximum="15"/>
           </h:inputText>
           
       </h:outputLabel>
@@ -120,23 +116,28 @@ text-transform: none;
       <h:outputLabel value="city">
           <h:inputText value="#{employee.city}">
               <f:validateRequired/>
+              <f:validateLength minimum="5" maximum="10"/>
+          </h:inputText>
+          
+      </h:outputLabel>
+      </p>
+      <p align="right" style="font-size: 5pt; color: #000000">
+      <h:outputLabel value="username">
+          <h:inputText value="#{employee.username}">
+              <f:validateRequired/>
               <f:validateLength minimum="4" maximum="6"/>
           </h:inputText>
           
       </h:outputLabel>
       </p>
-                <p align="right" style="font-size: 5pt; color: #000000">
- <h:commandButton value="cancel" action="index.xhtml" >
+  <p align="right" style="font-size: 5pt; color: #000000">
+ <h:commandButton value="cancel" action="index" >
                    </h:commandButton>
-                </p>
-      <p align="right" style="font-size: 5pt; color: #000000">
-   <h:commandButton id="submitBtn" value="Register" action="#{employee.register()}" >
+       <h:commandButton id="submitBtn" value="Register" action="#{employee.register()}" >
                    </h:commandButton>
-      </p>
+    </p>
           </fieldset>
         </h:form>
 </h:body> 
-    
-
 </html>
 
